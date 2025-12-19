@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>WAREHOUSE RAPIDO ASIA</title>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<style>
+body {
+  background: #f5f7fa;
+  font-family: inherit;
+}
+.box {
+  max-width: 900px;
+  margin: auto;
+}
+
+/* Placeholder dropdown màu nhạt */
+select option[value=""][disabled] {
+  color: #999999;
+}
+
+/* Thông báo trạng thái gửi */
+#status-message {
+  margin-top: 10px;
+  font-weight: bold;
+}
+#status-message.success {
+  color: green;
+}
+#status-message.error {
+  color: red;
+}
+</style>
+
+</head>
+<body>
+
+<section class="hero is-link">
+  <div class="hero-body has-text-centered">
+    <h1 class="title">WAREHOUSE RAPIDO ASIA</h1>
+    <p class="subtitle">REQUEST INBOUND - OUTBOUND</p>
+  </div>
+</section>
+
+<div class="box mt-4">
+
+<form id="truck-form">
+
+<div class="columns">
+  <div class="column">
+    <label class="label">Biển số xe</label>
+    <input class="input" type="text" name="BIỂN SỐ XE" placeholder="29H-04321" required>
+  </div>
+  <div class="column">
+    <label class="label">Tên tài xế</label>
+    <input class="input" type="text" name="TÀI XẾ" placeholder="Nguyễn Văn A">
+  </div>
+</div>
+
+<div class="columns">
+  <div class="column">
+    <label class="label">Loại xe</label>
+    <div class="select is-fullwidth">
+      <select name="LOẠI XE" required>
+        <option value="" selected disabled>Chọn loại xe</option>
+        <option>Xe tải</option>
+        <option>Container</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="column">
+    <label class="label">Tải trọng</label>
+    <div class="select is-fullwidth">
+      <select name="TẢI TRỌNG" required>
+        <option value="" selected disabled>Chọn tải trọng</option>
+        <option>1.4T</option>
+        <option>2T</option>
+        <option>2.5T</option>
+        <option>3.5T</option>
+        <option>5T</option>
+        <option>7T</option>
+        <option>8T</option>
+        <option>9T</option>
+        <option>Cont 20</option>
+        <option>Cont 40</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="column">
+    <label class="label">Loại yêu cầu</label>
+    <div class="select is-fullwidth">
+      <select name="LOẠI YÊU CẦU" required>
+        <option value="" selected disabled>Chọn loại yêu cầu</option>
+        <option>Xuất kho</option>
+        <option>Nhập kho</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="column">
+    <label class="label">Loại hàng</label>
+    <div class="select is-fullwidth">
+      <select name="LOẠI HÀNG" required>
+        <option value="" selected disabled>Chọn loại hàng</option>
+        <option>Thành phẩm</option>
+        <option>Nguyên vật liệu</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="columns">
+  <div class="column">
+    <label class="label">Thời gian xe vào cổng</label>
+    <input type="datetime-local" class="input" name="THỜI GIAN XE VÀO">
+  </div>
+  <div class="column">
+    <label class="label">Bắt đầu chuẩn bị hàng</label>
+    <input type="datetime-local" class="input" name="BẮT ĐẦU CHUẨN BỊ HÀNG">
+  </div>
+  <div class="column">
+    <label class="label">Kết thúc chuẩn bị hàng</label>
+    <input type="datetime-local" class="input" name="KẾT THÚC CHUẨN BỊ HÀNG">
+  </div>
+</div>
+
+<div class="columns">
+  <div class="column">
+    <label class="label">Bắt đầu quét hàng</label>
+    <input type="datetime-local" class="input" name="BẮT ĐẦU QUÉT HÀNG">
+  </div>
+  <div class="column">
+    <label class="label">Kết thúc quét hàng</label>
+    <input type="datetime-local" class="input" name="KẾT THÚC QUÉT HÀNG">
+  </div>
+</div>
+
+<div class="columns">
+  <div class="column">
+    <label class="label">Bắt đầu bốc hàng</label>
+    <input type="datetime-local" class="input" name="BẮT ĐẦU BỐC HÀNG">
+  </div>
+
+  <div class="column">
+    <label class="label">Kết thúc bốc hàng</label>
+    <input type="datetime-local" class="input" name="KẾT THÚC BỐC HÀNG">
+  </div>
+
+  <div class="column">
+    <label class="label">Thời gian xe ra cổng</label>
+    <input type="datetime-local" class="input" name="THỜI GIAN XE RA">
+  </div>
+</div>
+
+<hr>
+
+<div class="column">
+  <label class="label">Nhân lực</label>
+  <div class="select is-fullwidth">
+    <select name="NHÂN LỰC" required>
+      <option value="" selected disabled>Chọn nhân lực</option>
+      <option>Bốc xếp ngoài</option>
+      <option>Tự bốc</option>
+    </select>
+  </div>
+</div>
+
+<div class="field">
+  <label class="label">Ghi chú</label>
+  <textarea class="textarea" name="GHI CHÚ"></textarea>
+</div>
+
+<br>
+
+<button class="button is-link is-fullwidth" type="submit">
+  GỬI THÔNG TIN
+</button>
+
+<!-- Thông báo trạng thái -->
+<div id="status-message"></div>
+
+</form>
+
+</div>
+
+<script>
+$('#truck-form').on('submit', function(e){
+  e.preventDefault();
+
+  // Reset trạng thái trước khi gửi
+  $('#status-message').removeClass('success error').text('Đang gửi dữ liệu...');
+
+  $.ajax({
+    url: 'https://script.google.com/macros/s/AKfycbwelEGI6uDdwYBgCguLjhtlNUWmnQHV8479HYo1T3vqw-XutgthHDDC1ywb1RAaofCZwQ/exec',
+    method: 'POST',
+    data: $(this).serialize(),
+    success: function(){
+      $('#status-message').addClass('success').text('Gửi dữ liệu thành công!');
+      $('#truck-form')[0].reset();
+    },
+    error: function(){
+      $('#status-message').addClass('error').text('Có lỗi xảy ra, vui lòng thử lại.');
+    }
+  });
+});
+</script>
+
+</body>
+</html>
