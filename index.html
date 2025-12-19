@@ -3,37 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <title>WAREHOUSE RAPIDO ASIA</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
-body {
-  background: #f5f7fa;
-  font-family: inherit;
-  padding: 10px;
-}
-.box {
-  max-width: 900px;
-  margin: auto;
-}
-
-/* Placeholder dropdown màu nhạt */
-select option[value=""][disabled] {
-  color: #999999;
-}
-
-/* Thông báo trạng thái gửi */
-#status-message {
-  margin-top: 10px;
-  font-weight: bold;
-  transition: color 0.3s ease;
-}
+body { background: #f5f7fa; font-family: inherit; padding: 10px; }
+.box { max-width: 900px; margin: auto; padding: 20px; background: white; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+#status-message { margin-top: 10px; font-weight: bold; transition: color 0.3s ease; }
 #status-message.success { color: green; }
 #status-message.error { color: red; }
-
-/* Responsive tối ưu mobile */
 @media screen and (max-width: 768px) {
   .columns { flex-direction: column; }
-  .column { width: 100% !important; }
+  .column { width: 100% !important; margin-bottom: 12px; }
   .input, .select select, .textarea { font-size: 16px; padding: 12px; }
   label.label { font-size: 14px; margin-bottom: 6px; }
   button.button { font-size: 18px; padding: 12px; }
@@ -52,7 +33,6 @@ select option[value=""][disabled] {
 <div class="box mt-4">
 <form id="truck-form">
 
-<!-- Biển số xe & Tài xế -->
 <div class="columns is-multiline">
   <div class="column is-full-mobile">
     <label class="label">Biển số xe</label>
@@ -64,13 +44,12 @@ select option[value=""][disabled] {
   </div>
 </div>
 
-<!-- Loại xe, Tải trọng, Loại yêu cầu, Loại hàng -->
 <div class="columns is-multiline">
   <div class="column is-full-mobile">
     <label class="label">Loại xe</label>
     <div class="select is-fullwidth">
       <select name="loai_xe" required>
-        <option value="" selected disabled>Chọn loại xe</option>
+        <option value="" disabled selected>Chọn loại xe</option>
         <option>Xe tải</option>
         <option>Container</option>
       </select>
@@ -80,7 +59,7 @@ select option[value=""][disabled] {
     <label class="label">Tải trọng</label>
     <div class="select is-fullwidth">
       <select name="tai_trong" required>
-        <option value="" selected disabled>Chọn tải trọng</option>
+        <option value="" disabled selected>Chọn tải trọng</option>
         <option>1.4T</option>
         <option>2T</option>
         <option>2.5T</option>
@@ -98,7 +77,7 @@ select option[value=""][disabled] {
     <label class="label">Loại yêu cầu</label>
     <div class="select is-fullwidth">
       <select name="loai_yeu_cau" required>
-        <option value="" selected disabled>Chọn loại yêu cầu</option>
+        <option value="" disabled selected>Chọn loại yêu cầu</option>
         <option>Xuất kho</option>
         <option>Nhập kho</option>
       </select>
@@ -108,7 +87,7 @@ select option[value=""][disabled] {
     <label class="label">Loại hàng</label>
     <div class="select is-fullwidth">
       <select name="loai_hang" required>
-        <option value="" selected disabled>Chọn loại hàng</option>
+        <option value="" disabled selected>Chọn loại hàng</option>
         <option>Thành phẩm</option>
         <option>Nguyên vật liệu</option>
       </select>
@@ -118,7 +97,6 @@ select option[value=""][disabled] {
 
 <hr>
 
-<!-- Các mốc thời gian -->
 <div class="columns is-multiline">
   <div class="column is-full-mobile">
     <label class="label">Thời gian xe vào cổng</label>
@@ -156,13 +134,12 @@ select option[value=""][disabled] {
 
 <hr>
 
-<!-- Nhân lực & ghi chú -->
 <div class="columns is-multiline">
   <div class="column is-full-mobile">
     <label class="label">Nhân lực</label>
     <div class="select is-fullwidth">
       <select name="nhan_luc" required>
-        <option value="" selected disabled>Chọn nhân lực</option>
+        <option value="" disabled selected>Chọn nhân lực</option>
         <option>Bốc xếp ngoài</option>
         <option>Tự bốc</option>
       </select>
@@ -189,7 +166,7 @@ $('#truck-form').on('submit', function(e){
   $status.removeClass('success error').text('Đang gửi dữ liệu...');
   $btn.prop('disabled', true);
 
-  // Validation thời gian tự động
+  // Validation thời gian
   const startCB = $('input[name="bat_dau_chuan_bi"]').val();
   const endCB = $('input[name="ket_thuc_chuan_bi"]').val();
   const startScan = $('input[name="bat_dau_quet"]').val();
@@ -206,7 +183,7 @@ $('#truck-form').on('submit', function(e){
   }
 
   $.ajax({
-    url: 'https://script.google.com/macros/s/AKfycbzW6fbvJfXsp46h8irvycF6Y9gRPtUIk3zplNkg9khZi-j5wC3FggLlGoUUD5ZSkuQXdg/exec',
+    url: 'https://script.google.com/macros/s/AKfycbzP_X9z0B-b00ai9yf1Eyj6KYWIqOEv1StslSRx1PjQ7lVxJDe1Gam-maCpGUBW5QHoOA/exec', // Thay bằng URL Web App
     method: 'POST',
     data: $form.serialize(),
     success: () => {
@@ -221,4 +198,3 @@ $('#truck-form').on('submit', function(e){
 </script>
 </body>
 </html>
-
