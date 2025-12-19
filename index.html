@@ -12,7 +12,7 @@ body {
   padding: 10px;
 }
 .box {
-  max-width: 500px; /* giới hạn trên màn hình lớn */
+  max-width: 900px;
   margin: auto;
 }
 
@@ -27,18 +27,16 @@ select option[value=""][disabled] {
   font-weight: bold;
   transition: color 0.3s ease;
 }
-#status-message.success {
-  color: green;
-}
-#status-message.error {
-  color: red;
-}
+#status-message.success { color: green; }
+#status-message.error { color: red; }
 
-/* Responsive columns trên điện thoại */
-@media (max-width: 768px) {
-  .columns {
-    flex-direction: column;
-  }
+/* Responsive tối ưu mobile */
+@media screen and (max-width: 768px) {
+  .columns { flex-direction: column; }
+  .column { width: 100% !important; }
+  .input, .select select, .textarea { font-size: 16px; padding: 12px; }
+  label.label { font-size: 14px; margin-bottom: 6px; }
+  button.button { font-size: 18px; padding: 12px; }
 }
 </style>
 </head>
@@ -52,10 +50,9 @@ select option[value=""][disabled] {
 </section>
 
 <div class="box mt-4">
-
 <form id="truck-form">
 
-<!-- Biển số xe và Tài xế -->
+<!-- Biển số xe & Tài xế -->
 <div class="columns is-multiline">
   <div class="column is-full-mobile">
     <label class="label">Biển số xe</label>
@@ -67,7 +64,7 @@ select option[value=""][disabled] {
   </div>
 </div>
 
-<!-- Loại xe, tải trọng, loại yêu cầu, loại hàng -->
+<!-- Loại xe, Tải trọng, Loại yêu cầu, Loại hàng -->
 <div class="columns is-multiline">
   <div class="column is-full-mobile">
     <label class="label">Loại xe</label>
@@ -121,7 +118,7 @@ select option[value=""][disabled] {
 
 <hr>
 
-<!-- Thời gian các mốc -->
+<!-- Các mốc thời gian -->
 <div class="columns is-multiline">
   <div class="column is-full-mobile">
     <label class="label">Thời gian xe vào cổng</label>
@@ -177,12 +174,8 @@ select option[value=""][disabled] {
   </div>
 </div>
 
-<button class="button is-link is-fullwidth" type="submit">
-  GỬI THÔNG TIN
-</button>
-
+<button class="button is-link is-fullwidth" type="submit">GỬI THÔNG TIN</button>
 <div id="status-message"></div>
-
 </form>
 </div>
 
@@ -196,8 +189,24 @@ $('#truck-form').on('submit', function(e){
   $status.removeClass('success error').text('Đang gửi dữ liệu...');
   $btn.prop('disabled', true);
 
+  // Validation thời gian tự động
+  const startCB = $('input[name="bat_dau_chuan_bi"]').val();
+  const endCB = $('input[name="ket_thuc_chuan_bi"]').val();
+  const startScan = $('input[name="bat_dau_quet"]').val();
+  const endScan = $('input[name="ket_thuc_quet"]').val();
+  const startLoad = $('input[name="bat_dau_boc"]').val();
+  const endLoad = $('input[name="ket_thuc_boc"]').val();
+
+  if ((startCB && endCB && startCB > endCB) ||
+      (startScan && endScan && startScan > endScan) ||
+      (startLoad && endLoad && startLoad > endLoad)) {
+    $status.addClass('error').text('Lỗi: Thời gian bắt đầu không được lớn hơn kết thúc.');
+    $btn.prop('disabled', false);
+    return;
+  }
+
   $.ajax({
-    url: 'https://script.google.com/macros/s/AKfycbxS-ZrJIcaML821h8dqDRdugdx4YfVYSa208JDhbnArTaXdOIzyZ8lIO7aj1aO3Bcefjw/exec',
+    url: 'https://script.google.com/macros/s/AKfycby8u1uZqFXGfC-uqiLAtkCuHDb6NIX1wCoVGO8Cza_IFdpcLGGLRL13vOfleHSreTBdAw/exec',
     method: 'POST',
     data: $form.serialize(),
     success: () => {
@@ -210,7 +219,5 @@ $('#truck-form').on('submit', function(e){
   });
 });
 </script>
-
 </body>
 </html>
-
