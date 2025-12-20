@@ -12,7 +12,6 @@ body { background: #f5f7fa; font-family: inherit; padding: 10px; }
 #status-message { margin-top: 10px; font-weight: bold; transition: color 0.3s ease; }
 #status-message.success { color: green; }
 #status-message.error { color: red; }
-.input.error, .select.error select { border-color: red; }
 @media screen and (max-width: 768px) {
   .columns { flex-direction: column; }
   .column { width: 100% !important; margin-bottom: 12px; }
@@ -47,18 +46,17 @@ body { background: #f5f7fa; font-family: inherit; padding: 10px; }
   <div class="column is-full-mobile">
     <label class="label">Đơn vị</label>
     <div class="select is-fullwidth">
-      <select name="don_vi" id="don_vi_select" required>
+      <select name="don_vi" required>
         <option value="" disabled selected>Chọn đơn vị</option>
-        <option value="Q2C">Q2C</option>
-        <option value="Sơn Hùng">Sơn Hùng</option>
-        <option value="VT89">VT89</option>
-        <option value="Tiến Lợi">Tiến Lợi</option>
-        <option value="CBT">CBT</option>
-        <option value="KH Tự lấy">KH Tự lấy</option>
-        <option value="khac">Đơn vị khác</option>
+        <option>Q2C</option>
+        <option>Sơn Hùng</option>
+        <option>VT89</option>
+        <option>Tiến Lợi</option>
+        <option>CBT</option>
+        <option>KH Tự lấy</option>
+        <option>Đơn vị khác</option>
       </select>
     </div>
-    <input type="text" name="don_vi_khac" id="don_vi_khac_input" placeholder="Nhập tên đơn vị khác" style="display:none; margin-top:6px;">
   </div>
 </div>
 
@@ -154,7 +152,7 @@ body { background: #f5f7fa; font-family: inherit; padding: 10px; }
 
 <hr>
 
-<!-- Nhân lực & ghi chú -->
+<!-- Nhân lực + Ghi chú -->
 <div class="columns is-multiline">
   <div class="column is-full-mobile">
     <label class="label">Nhân lực</label>
@@ -178,67 +176,44 @@ body { background: #f5f7fa; font-family: inherit; padding: 10px; }
 </div>
 
 <script>
-$(document).ready(function(){
-  // Hiện input khi chọn "Đơn vị khác"
-  $('#don_vi_select').on('change', function(){
-    if ($(this).val() === 'khac') {
-      $('#don_vi_khac_input').show().attr('required', true);
-    } else {
-      $('#don_vi_khac_input').hide().attr('required', false).val('');
-    }
-  });
+$('#truck-form').on('submit', function(e){
+  e.preventDefault();
+  const $form = $(this);
+  const $status = $('#status-message');
+  const $btn = $form.find('button[type="submit"]');
 
-  $('#truck-form').on('submit', function(e){
-    e.preventDefault();
-    const $form = $(this);
-    const $status = $('#status-message');
-    const $btn = $form.find('button[type="submit"]');
+  $status.removeClass('success error').text('Đang gửi dữ liệu...');
+  $btn.prop('disabled', true);
 
-    $status.removeClass('success error').text('Đang gửi dữ liệu...');
-    $btn.prop('disabled', true);
+  // Validation thời gian
+  const startCB = $('input[name="bat_dau_chuan_bi"]').val();
+  const endCB = $('input[name="ket_thuc_chuan_bi"]').val();
+  const startScan = $('input[name="bat_dau_quet"]').val();
+  const endScan = $('input[name="ket_thuc_quet"]').val();
+  const startLoad = $('input[name="bat_dau_boc"]').val();
+  const endLoad = $('input[name="ket_thuc_boc"]').val();
 
-    // Validation thời gian tổng thể
-    const steps = [
-      ['bat_dau_chuan_bi', 'ket_thuc_chuan_bi'],
-      ['bat_dau_quet', 'ket_thuc_quet'],
-      ['bat_dau_boc', 'ket_thuc_boc']
-    ];
-    for (let [startName, endName] of steps) {
-      const start = $(`input[name="${startName}"]`).val();
-      const end = $(`input[name="${endName}"]`).val();
-      if (start && end && start > end) {
-        $status.addClass('error').text(`Lỗi: ${startName} không được lớn hơn ${endName}`);
-        $btn.prop('disabled', false);
-        return;
-      }
-    }
+  if ((startCB && endCB && startCB > endCB) ||
+      (startScan && endScan && startScan > endScan) ||
+      (startLoad && endLoad && startLoad > endLoad)) {
+    $status.addClass('error').text('Lỗi: Thời gian bắt đầu không được lớn hơn kết thúc.');
+    $btn.prop('disabled', false);
+    return;
+  }
 
-    // Nếu chọn "Đơn vị khác", tạo input ẩn copy giá trị
-    if ($('#don_vi_select').val() === 'khac') {
-      $('<input>').attr({
-        type: 'hidden',
-        name: 'don_vi',
-        value: $('#don_vi_khac_input').val()
-      }).appendTo($form);
-    }
-
-    // AJAX gửi dữ liệu
-    $.ajax({
-      url: 'https://script.google.com/macros/s/AKfycbwYRMfKW9NU3p-G1K2bmYksylNuNiFXm9zIOfA8Dvz8aqjtiMkmD5CA4Mf091FJwgTxbg/exec', // Thay bằng URL Web App
-      method: 'POST',
-      data: $form.serialize(),
-      success: () => {
-        $status.addClass('success').text('Gửi dữ liệu thành công!');
-        $form[0].reset();
-        $('#don_vi_khac_input').hide();
-        $('input[name="bien_so_xe"]').focus();
-      },
-      error: () => $status.addClass('error').text('Có lỗi xảy ra, vui lòng thử lại.'),
-      complete: () => $btn.prop('disabled', false)
-    });
+  $.ajax({
+    url: 'https://script.google.com/macros/s/AKfycby51XK6wBI_3AK0P-eeQD7Q-47vDUXb1Y0X7ox4YUURmBo5GBVa_LFRfsO9OsVr2Bj7_g/exec', // Thay bằng URL Web App
+    method: 'POST',
+    data: $form.serialize(),
+    success: () => {
+      $status.addClass('success').text('Gửi dữ liệu thành công!');
+      $form[0].reset();
+      $('input[name="bien_so_xe"]').focus();
+    },
+    error: () => $status.addClass('error').text('Có lỗi xảy ra, vui lòng thử lại.'),
+    complete: () => $btn.prop('disabled', false)
   });
 });
 </script>
 </body>
 </html>
-
