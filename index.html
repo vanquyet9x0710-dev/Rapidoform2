@@ -38,11 +38,23 @@ body { background: #f5f7fa; font-family: inherit; padding: 10px; }
     <label class="label">Biển số xe</label>
     <input class="input" type="text" name="bien_so_xe" placeholder="29H-04321" required>
   </div>
+
+<div class="columns is-multiline">
   <div class="column is-full-mobile">
-    <label class="label">Tên tài xế</label>
-    <input class="input" type="text" name="tai_xe" placeholder="Nguyễn Văn A">
+    <label class="label">Đơn vị</label>
+    <div class="select is-fullwidth">
+      <select name="don_vi" required>
+        <option value="" disabled selected>Chọn đơn vị</option>
+        <option>Q2C</option>
+        <option>Sơn Hùng</option>
+        <option>VT89</option>
+        <option>Tiến Lợi</option>
+        <option>CBT</option>
+        <option>KH Tự lấy</option>
+        <option>Đơn vị khác</option>
+      </select>
+    </div>
   </div>
-</div>
 
 <div class="columns is-multiline">
   <div class="column is-full-mobile">
@@ -198,3 +210,4 @@ $('#truck-form').on('submit', function(e){
 </script>
 </body>
 </html>
+
