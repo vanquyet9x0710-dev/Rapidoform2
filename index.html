@@ -5,8 +5,7 @@
 <title>WAREHOUSE RAPIDO ASIA</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
 </head>
 
 <body style="background:#f5f7fa;padding:12px">
@@ -24,9 +23,9 @@
 <label class="label">Biển số xe *</label>
 <input class="input" name="bien_so_xe" required>
 
-<label class="label mt-3">Nhà cung cấp (NCC) *</label>
+<label class="label mt-3">Nhà cung cấp (ncc) *</label>
 <div class="select is-fullwidth">
-  <select name="NCC" required>
+  <select name="ncc" required>
     <option value="">-- Chọn --</option>
     <option>Q2C</option>
     <option>Sơn Hùng</option>
@@ -163,13 +162,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
-
     status.className = "has-text-info";
     status.innerText = "⏳ Đang gửi dữ liệu...";
 
     const formData = new FormData(form);
 
-    fetch("https://script.google.com/macros/s/AKfycbySXI84DVgHD93Y1AMIIGcMqpt_O9WvvpoDGLNNw5kx6eJFTW0UC9e8KsOzliN8Qw-3/exec", {
+    // Dán URL Web App của bạn vào đây
+    const webAppURL = "https://script.google.com/macros/s/AKfycbynusQNTmOBii_ZrHyn_kdQnxP0U6xyC8HC2K5a4Gd4GBDfE87KheE5EzWV_YlFEcQmJQ/exec";
+
+    fetch(webAppURL, {
       method: "POST",
       body: formData
     })
@@ -195,6 +196,3 @@ document.addEventListener("DOMContentLoaded", function () {
 
 </body>
 </html>
-
-
-
