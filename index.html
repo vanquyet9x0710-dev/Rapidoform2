@@ -5,140 +5,190 @@
 <title>WAREHOUSE RAPIDO ASIA</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-<style>
-body { background:#f5f7fa; padding:10px; }
-.box { max-width:1000px; margin:auto; border-radius:10px; }
-#status-message { margin-top:10px; font-weight:bold; }
-.success { color:green; }
-.error { color:red; }
-</style>
+<link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
 </head>
 
-<body>
+<body style="background:#f5f7fa;padding:12px">
 
 <section class="hero is-link">
   <div class="hero-body has-text-centered">
     <h1 class="title">WAREHOUSE RAPIDO ASIA</h1>
-    <p class="subtitle">REQUEST INBOUND – OUTBOUND</p>
+    <p class="subtitle">INBOUND – OUTBOUND FORM</p>
   </div>
 </section>
 
-<div class="box mt-4 p-4">
-<form id="truck-form">
+<div class="box mt-4" style="max-width:1100px;margin:auto">
+<form id="truckForm">
 
-<label class="label">Biển số xe</label>
+<label class="label">Biển số xe *</label>
 <input class="input" name="bien_so_xe" required>
 
-<label class="label mt-3">Đơn vị</label>
+<label class="label mt-3">Nhà cung cấp (NCC) *</label>
 <div class="select is-fullwidth">
-<select name="don_vi" required>
-  <option value="">-- Chọn --</option>
-  <option>Q2C</option>
-  <option>Sơn Hùng</option>
-  <option>VT89</option>
-  <option>Tiến Lợi</option>
-  <option>CBT</option>
-  <option>KH Tự lấy</option>
-</select>
+  <select name="NCC" required>
+    <option value="">-- Chọn --</option>
+    <option>Q2C</option>
+    <option>Sơn Hùng</option>
+    <option>VT89</option>
+    <option>Tiến Lợi</option>
+    <option>CBT</option>
+    <option>KH Tự lấy</option>
+  </select>
 </div>
 
 <div class="columns mt-3">
-<div class="column">
-<label class="label">Loại xe</label>
-<select class="select is-fullwidth" name="loai_xe">
-  <option>Xe tải</option>
-  <option>Container</option>
-</select>
-</div>
+  <div class="column">
+    <label class="label">Loại xe *</label>
+    <div class="select is-fullwidth">
+      <select name="loai_xe" required>
+        <option value="">-- Chọn --</option>
+        <option>Xe tải</option>
+        <option>Container</option>
+      </select>
+    </div>
+  </div>
 
-<div class="column">
-<label class="label">Tải trọng</label>
-<select class="select is-fullwidth" name="tai_trong">
-  <option>1.4T</option>
-  <option>2T</option>
-  <option>2.5T</option>
-  <option>3.5T</option>
-  <option>5T</option>
-  <option>7T</option>
-  <option>8T</option>
-  <option>9T</option>
-  <option>Cont 20</option>
-  <option>Cont 40</option>
-</select>
-</div>
+  <div class="column">
+    <label class="label">Tải trọng *</label>
+    <div class="select is-fullwidth">
+      <select name="tai_trong" required>
+        <option value="">-- Chọn --</option>
+        <option>1.4T</option>
+        <option>2T</option>
+        <option>2.5T</option>
+        <option>3.5T</option>
+        <option>5T</option>
+        <option>7T</option>
+        <option>8T</option>
+        <option>9T</option>
+        <option>Cont 20</option>
+        <option>Cont 40</option>
+      </select>
+    </div>
+  </div>
 </div>
 
 <div class="columns">
-<div class="column">
-<label class="label">Loại yêu cầu</label>
-<select class="select is-fullwidth" name="loai_yeu_cau">
-  <option>Nhập kho</option>
-  <option>Xuất kho</option>
-</select>
-</div>
+  <div class="column">
+    <label class="label">Loại yêu cầu</label>
+    <div class="select is-fullwidth">
+      <select name="loai_yeu_cau">
+        <option>Nhập kho</option>
+        <option>Xuất kho</option>
+      </select>
+    </div>
+  </div>
 
-<div class="column">
-<label class="label">Loại hàng</label>
-<select class="select is-fullwidth" name="loai_hang">
-  <option>Thành phẩm</option>
-  <option>Nguyên vật liệu</option>
-</select>
-</div>
+  <div class="column">
+    <label class="label">Loại hàng</label>
+    <div class="select is-fullwidth">
+      <select name="loai_hang">
+        <option>Thành phẩm</option>
+        <option>Nguyên vật liệu</option>
+      </select>
+    </div>
+  </div>
 </div>
 
 <hr>
 
 <div class="columns is-multiline">
-<div class="column is-half">
-<label class="label">Xe vào cổng</label>
-<input type="datetime-local" class="input" name="vao_cong">
-</div>
+  <div class="column is-half">
+    <label class="label">Xe vào cổng</label>
+    <input type="datetime-local" class="input" name="vao_cong">
+  </div>
 
-<div class="column is-half">
-<label class="label">Xe ra cổng</label>
-<input type="datetime-local" class="input" name="ra_cong">
-</div>
+  <div class="column is-half">
+    <label class="label">Bắt đầu chuẩn bị</label>
+    <input type="datetime-local" class="input" name="bat_dau_chuan_bi">
+  </div>
+
+  <div class="column is-half">
+    <label class="label">Kết thúc chuẩn bị</label>
+    <input type="datetime-local" class="input" name="ket_thuc_chuan_bi">
+  </div>
+
+  <div class="column is-half">
+    <label class="label">Bắt đầu quét</label>
+    <input type="datetime-local" class="input" name="bat_dau_quet">
+  </div>
+
+  <div class="column is-half">
+    <label class="label">Kết thúc quét</label>
+    <input type="datetime-local" class="input" name="ket_thuc_quet">
+  </div>
+
+  <div class="column is-half">
+    <label class="label">Bắt đầu bốc</label>
+    <input type="datetime-local" class="input" name="bat_dau_boc">
+  </div>
+
+  <div class="column is-half">
+    <label class="label">Kết thúc bốc</label>
+    <input type="datetime-local" class="input" name="ket_thuc_boc">
+  </div>
+
+  <div class="column is-half">
+    <label class="label">Xe ra cổng</label>
+    <input type="datetime-local" class="input" name="ra_cong">
+  </div>
 </div>
 
 <label class="label">Nhân lực</label>
-<select class="select is-fullwidth" name="nhan_luc">
-  <option>Tự bốc</option>
-  <option>Bốc xếp ngoài</option>
-</select>
+<div class="select is-fullwidth">
+  <select name="nhan_luc">
+    <option>Tự bốc</option>
+    <option>Bốc xếp ngoài</option>
+  </select>
+</div>
 
 <label class="label mt-3">Ghi chú</label>
 <textarea class="textarea" name="ghi_chu"></textarea>
 
-<button class="button is-link is-fullwidth mt-4" type="submit">
-GỬI THÔNG TIN
+<button class="button is-link is-fullwidth mt-5">
+🚚 GỬI DỮ LIỆU
 </button>
 
-<div id="status-message"></div>
+<p id="status" class="has-text-centered mt-3"></p>
 
 </form>
 </div>
 
+<!-- ===== JS GỘP TRỰC TIẾP ===== -->
 <script>
-$('#truck-form').submit(function(e){
-  e.preventDefault();
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("truckForm");
+  const status = document.getElementById("status");
 
-  const status = $('#status-message');
-  status.removeClass().text('Đang gửi dữ liệu...');
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
 
-  $.ajax({
-    url: 'https://script.google.com/macros/s/AKfycbzpAsUa9VXunzezYfOYsrkUdCniyxNFgoVvs1eQwXPRvRpsFe0Npcq3JgRURWIU9betXw/exec',   // 👈 DÁN LINK WEB APP VÀO ĐÂY
-    method: 'POST',
-    data: $(this).serialize(),
-    success: function(res){
-      status.addClass('success').text('✅ Gửi thành công');
-      $('#truck-form')[0].reset();
-    },
-    error: function(){
-      status.addClass('error').text('❌ Lỗi kết nối Google Sheet');
-    }
+    status.className = "has-text-info";
+    status.innerText = "⏳ Đang gửi dữ liệu...";
+
+    const formData = new FormData(form);
+
+    fetch("https://script.google.com/macros/s/AKfycbxzm0G9fXikbMTTIpGAx8sC3Qd6DWDRL611stqiC4p8Nsnd7hJev787owVsyFGiWobaTA/exec", {
+      method: "POST",
+      body: formData
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.status === "success") {
+        status.className = "has-text-success";
+        status.innerText = "✅ Gửi dữ liệu thành công";
+        form.reset();
+      } else {
+        status.className = "has-text-danger";
+        status.innerText = "❌ " + data.message;
+      }
+    })
+    .catch(err => {
+      console.error(err);
+      status.className = "has-text-danger";
+      status.innerText = "❌ Không kết nối được Google Sheet";
+    });
   });
 });
 </script>
