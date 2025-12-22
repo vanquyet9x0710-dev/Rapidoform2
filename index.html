@@ -10,12 +10,7 @@
 
 <style>
 body { background:#f5f7fa; padding:10px; }
-.box {
-  max-width: 1000px;
-  margin:auto;
-  border-radius:10px;
-  box-shadow:0 4px 12px rgba(0,0,0,.1);
-}
+.box { max-width:1000px; margin:auto; border-radius:10px; }
 #status-message { margin-top:10px; font-weight:bold; }
 .success { color:green; }
 .error { color:red; }
@@ -31,42 +26,36 @@ body { background:#f5f7fa; padding:10px; }
   </div>
 </section>
 
-<div class="box mt-4">
+<div class="box mt-4 p-4">
 <form id="truck-form">
 
-<!-- BIỂN SỐ -->
-<div class="field">
-  <label class="label">Biển số xe</label>
-  <input class="input" name="bien_so_xe" required>
+<label class="label">Biển số xe</label>
+<input class="input" name="bien_so_xe" required>
+
+<label class="label mt-3">Đơn vị</label>
+<div class="select is-fullwidth">
+<select name="don_vi" required>
+  <option value="">-- Chọn --</option>
+  <option>Q2C</option>
+  <option>Sơn Hùng</option>
+  <option>VT89</option>
+  <option>Tiến Lợi</option>
+  <option>CBT</option>
+  <option>KH Tự lấy</option>
+</select>
 </div>
 
-<!-- ĐƠN VỊ -->
-<div class="field">
-  <label class="label">Đơn vị</label>
-  <div class="select is-fullwidth">
-    <select name="don_vi" required>
-      <option value="">-- Chọn --</option>
-      <option>Q2C</option>
-      <option>Sơn Hùng</option>
-      <option>VT89</option>
-      <option>Tiến Lợi</option>
-      <option>CBT</option>
-      <option>KH Tự lấy</option>
-    </select>
-  </div>
+<div class="columns mt-3">
+<div class="column">
+<label class="label">Loại xe</label>
+<select class="select is-fullwidth" name="loai_xe">
+  <option>Xe tải</option>
+  <option>Container</option>
+</select>
 </div>
 
-<!-- LOẠI XE / TẢI TRỌNG -->
-<div class="columns">
-  <div class="column">
-    <label class="label">Loại xe</label>
-    <select class="select is-fullwidth" name="loai_xe">
-      <option>Xe tải</option>
-      <option>Container</option>
-    </select>
-  </div>
-  <div class="column">
-    <label class="label">Tải trọng</label>
+<div class="column">
+<label class="label">Tải trọng</label>
 <select class="select is-fullwidth" name="tai_trong">
   <option>1.4T</option>
   <option>2T</option>
@@ -79,88 +68,56 @@ body { background:#f5f7fa; padding:10px; }
   <option>Cont 20</option>
   <option>Cont 40</option>
 </select>
-
-  </div>
+</div>
 </div>
 
-<!-- LOẠI YÊU CẦU / LOẠI HÀNG -->
 <div class="columns">
-  <div class="column">
-    <label class="label">Loại yêu cầu</label>
-    <select class="select is-fullwidth" name="loai_yeu_cau">
-      <option>Nhập kho</option>
-      <option>Xuất kho</option>
-    </select>
-  </div>
-  <div class="column">
-    <label class="label">Loại hàng</label>
-    <select class="select is-fullwidth" name="loai_hang">
-      <option>Thành phẩm</option>
-      <option>Nguyên vật liệu</option>
-    </select>
-  </div>
+<div class="column">
+<label class="label">Loại yêu cầu</label>
+<select class="select is-fullwidth" name="loai_yeu_cau">
+  <option>Nhập kho</option>
+  <option>Xuất kho</option>
+</select>
+</div>
+
+<div class="column">
+<label class="label">Loại hàng</label>
+<select class="select is-fullwidth" name="loai_hang">
+  <option>Thành phẩm</option>
+  <option>Nguyên vật liệu</option>
+</select>
+</div>
 </div>
 
 <hr>
 
-<!-- THỜI GIAN -->
 <div class="columns is-multiline">
-  <div class="column is-half">
-    <label class="label">Xe vào cổng</label>
-    <input type="datetime-local" class="input" name="vao_cong">
-  </div>
-  <div class="column is-half">
-    <label class="label">Bắt đầu chuẩn bị</label>
-    <input type="datetime-local" class="input" name="bat_dau_chuan_bi">
-  </div>
-  <div class="column is-half">
-    <label class="label">Kết thúc chuẩn bị</label>
-    <input type="datetime-local" class="input" name="ket_thuc_chuan_bi">
-  </div>
-  <div class="column is-half">
-    <label class="label">Bắt đầu quét</label>
-    <input type="datetime-local" class="input" name="bat_dau_quet">
-  </div>
-  <div class="column is-half">
-    <label class="label">Kết thúc quét</label>
-    <input type="datetime-local" class="input" name="ket_thuc_quet">
-  </div>
-  <div class="column is-half">
-    <label class="label">Bắt đầu bốc</label>
-    <input type="datetime-local" class="input" name="bat_dau_boc">
-  </div>
-  <div class="column is-half">
-    <label class="label">Kết thúc bốc</label>
-    <input type="datetime-local" class="input" name="ket_thuc_boc">
-  </div>
-  <div class="column is-half">
-    <label class="label">Xe ra cổng</label>
-    <input type="datetime-local" class="input" name="ra_cong">
-  </div>
+<div class="column is-half">
+<label class="label">Xe vào cổng</label>
+<input type="datetime-local" class="input" name="vao_cong">
 </div>
 
-<hr>
-
-<!-- NHÂN LỰC / GHI CHÚ -->
-<div class="columns">
-  <div class="column">
-    <label class="label">Nhân lực</label>
-    <select class="select is-fullwidth" name="nhan_luc">
-      <option>Tự bốc</option>
-      <option>Bốc xếp ngoài</option>
-    </select>
-  </div>
-  <div class="column">
-    <label class="label">Ghi chú</label>
-    <textarea class="textarea" name="ghi_chu"></textarea>
-  </div>
+<div class="column is-half">
+<label class="label">Xe ra cổng</label>
+<input type="datetime-local" class="input" name="ra_cong">
 </div>
+</div>
+
+<label class="label">Nhân lực</label>
+<select class="select is-fullwidth" name="nhan_luc">
+  <option>Tự bốc</option>
+  <option>Bốc xếp ngoài</option>
+</select>
+
+<label class="label mt-3">Ghi chú</label>
+<textarea class="textarea" name="ghi_chu"></textarea>
 
 <button class="button is-link is-fullwidth mt-4" type="submit">
-  GỬI THÔNG TIN
+GỬI THÔNG TIN
 </button>
 
 <div id="status-message"></div>
+
 </form>
 </div>
 
@@ -168,25 +125,19 @@ body { background:#f5f7fa; padding:10px; }
 $('#truck-form').submit(function(e){
   e.preventDefault();
 
-  const $status = $('#status-message');
-  const $btn = $('button[type=submit]');
-
-  $btn.prop('disabled', true);
-  $status.removeClass().text('Đang gửi...');
+  const status = $('#status-message');
+  status.removeClass().text('Đang gửi dữ liệu...');
 
   $.ajax({
-    url: 'https://script.google.com/macros/s/AKfycbyRviRmL6XKmF5MIK9t0oRxZlCQFs4sAZoW2ctJGHzNaHMS0CmacKns-5zumPR1Dt7bDw/exec',
-    type: 'POST',
+    url: 'https://script.google.com/macros/s/AKfycbzpAsUa9VXunzezYfOYsrkUdCniyxNFgoVvs1eQwXPRvRpsFe0Npcq3JgRURWIU9betXw/exec',   // 👈 DÁN LINK WEB APP VÀO ĐÂY
+    method: 'POST',
     data: $(this).serialize(),
-    success: function(){
-      $status.addClass('success').text('✅ Gửi thành công');
+    success: function(res){
+      status.addClass('success').text('✅ Gửi thành công');
       $('#truck-form')[0].reset();
     },
     error: function(){
-      $status.addClass('error').text('❌ Lỗi gửi dữ liệu');
-    },
-    complete: function(){
-      $btn.prop('disabled', false);
+      status.addClass('error').text('❌ Lỗi kết nối Google Sheet');
     }
   });
 });
