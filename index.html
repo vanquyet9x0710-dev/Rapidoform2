@@ -9,23 +9,16 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <style>
-body {
-  background: #f5f7fa;
-  padding: 10px;
-}
+body { background:#f5f7fa; padding:10px; }
 .box {
-  max-width: 900px;
-  margin: auto;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  max-width: 1000px;
+  margin:auto;
+  border-radius:10px;
+  box-shadow:0 4px 12px rgba(0,0,0,.1);
 }
-#status-message {
-  margin-top: 12px;
-  font-weight: bold;
-}
-.success { color: green; }
-.error { color: red; }
+#status-message { margin-top:10px; font-weight:bold; }
+.success { color:green; }
+.error { color:red; }
 </style>
 </head>
 
@@ -34,17 +27,17 @@ body {
 <section class="hero is-link">
   <div class="hero-body has-text-centered">
     <h1 class="title">WAREHOUSE RAPIDO ASIA</h1>
-    <p class="subtitle">REQUEST INBOUND - OUTBOUND</p>
+    <p class="subtitle">REQUEST INBOUND – OUTBOUND</p>
   </div>
 </section>
 
 <div class="box mt-4">
 <form id="truck-form">
 
-<!-- BIỂN SỐ XE -->
+<!-- BIỂN SỐ -->
 <div class="field">
   <label class="label">Biển số xe</label>
-  <input class="input" type="text" name="bien_so_xe" required>
+  <input class="input" name="bien_so_xe" required>
 </div>
 
 <!-- ĐƠN VỊ -->
@@ -52,7 +45,7 @@ body {
   <label class="label">Đơn vị</label>
   <div class="select is-fullwidth">
     <select name="don_vi" required>
-      <option value="" disabled selected>Chọn đơn vị</option>
+      <option value="">-- Chọn --</option>
       <option>Q2C</option>
       <option>Sơn Hùng</option>
       <option>VT89</option>
@@ -63,57 +56,48 @@ body {
   </div>
 </div>
 
-<!-- LOẠI XE -->
+<!-- LOẠI XE / TẢI TRỌNG -->
 <div class="columns">
   <div class="column">
     <label class="label">Loại xe</label>
-    <div class="select is-fullwidth">
-      <select name="loai_xe" required>
-        <option value="" disabled selected>Chọn</option>
-        <option>Xe tải</option>
-        <option>Container</option>
-      </select>
-    </div>
+    <select class="select is-fullwidth" name="loai_xe">
+      <option>Xe tải</option>
+      <option>Container</option>
+    </select>
   </div>
-
   <div class="column">
     <label class="label">Tải trọng</label>
-    <div class="select is-fullwidth">
-      <select name="tai_trong" required>
-        <option value="" disabled selected>Chọn</option>
-        <option>1.4T</option>
-        <option>2T</option>
-        <option>3.5T</option>
-        <option>5T</option>
-        <option>Cont 20</option>
-        <option>Cont 40</option>
-      </select>
-    </div>
+<select class="select is-fullwidth" name="tai_trong">
+  <option>1.4T</option>
+  <option>2T</option>
+  <option>2.5T</option>
+  <option>3.5T</option>
+  <option>5T</option>
+  <option>7T</option>
+  <option>8T</option>
+  <option>9T</option>
+  <option>Cont 20</option>
+  <option>Cont 40</option>
+</select>
+
   </div>
 </div>
 
-<!-- LOẠI YÊU CẦU + HÀNG -->
+<!-- LOẠI YÊU CẦU / LOẠI HÀNG -->
 <div class="columns">
   <div class="column">
     <label class="label">Loại yêu cầu</label>
-    <div class="select is-fullwidth">
-      <select name="loai_yeu_cau" required>
-        <option value="" disabled selected>Chọn</option>
-        <option>Nhập kho</option>
-        <option>Xuất kho</option>
-      </select>
-    </div>
+    <select class="select is-fullwidth" name="loai_yeu_cau">
+      <option>Nhập kho</option>
+      <option>Xuất kho</option>
+    </select>
   </div>
-
   <div class="column">
     <label class="label">Loại hàng</label>
-    <div class="select is-fullwidth">
-      <select name="loai_hang" required>
-        <option value="" disabled selected>Chọn</option>
-        <option>Thành phẩm</option>
-        <option>Nguyên vật liệu</option>
-      </select>
-    </div>
+    <select class="select is-fullwidth" name="loai_hang">
+      <option>Thành phẩm</option>
+      <option>Nguyên vật liệu</option>
+    </select>
   </div>
 </div>
 
@@ -126,11 +110,6 @@ body {
     <input type="datetime-local" class="input" name="vao_cong">
   </div>
   <div class="column is-half">
-    <label class="label">Ra cổng</label>
-    <input type="datetime-local" class="input" name="ra_cong">
-  </div>
-
-  <div class="column is-half">
     <label class="label">Bắt đầu chuẩn bị</label>
     <input type="datetime-local" class="input" name="bat_dau_chuan_bi">
   </div>
@@ -138,7 +117,6 @@ body {
     <label class="label">Kết thúc chuẩn bị</label>
     <input type="datetime-local" class="input" name="ket_thuc_chuan_bi">
   </div>
-
   <div class="column is-half">
     <label class="label">Bắt đầu quét</label>
     <input type="datetime-local" class="input" name="bat_dau_quet">
@@ -147,7 +125,6 @@ body {
     <label class="label">Kết thúc quét</label>
     <input type="datetime-local" class="input" name="ket_thuc_quet">
   </div>
-
   <div class="column is-half">
     <label class="label">Bắt đầu bốc</label>
     <input type="datetime-local" class="input" name="bat_dau_boc">
@@ -156,60 +133,57 @@ body {
     <label class="label">Kết thúc bốc</label>
     <input type="datetime-local" class="input" name="ket_thuc_boc">
   </div>
+  <div class="column is-half">
+    <label class="label">Xe ra cổng</label>
+    <input type="datetime-local" class="input" name="ra_cong">
+  </div>
 </div>
 
 <hr>
 
-<!-- NHÂN LỰC -->
-<div class="field">
-  <label class="label">Nhân lực</label>
-  <div class="select is-fullwidth">
-    <select name="nhan_luc" required>
-      <option value="" disabled selected>Chọn</option>
-      <option>Bốc xếp ngoài</option>
+<!-- NHÂN LỰC / GHI CHÚ -->
+<div class="columns">
+  <div class="column">
+    <label class="label">Nhân lực</label>
+    <select class="select is-fullwidth" name="nhan_luc">
       <option>Tự bốc</option>
+      <option>Bốc xếp ngoài</option>
     </select>
+  </div>
+  <div class="column">
+    <label class="label">Ghi chú</label>
+    <textarea class="textarea" name="ghi_chu"></textarea>
   </div>
 </div>
 
-<!-- GHI CHÚ -->
-<div class="field">
-  <label class="label">Ghi chú</label>
-  <textarea class="textarea" name="ghi_chu"></textarea>
-</div>
+<button class="button is-link is-fullwidth mt-4" type="submit">
+  GỬI THÔNG TIN
+</button>
 
-<button type="submit" class="button is-link is-fullwidth">GỬI DỮ LIỆU</button>
 <div id="status-message"></div>
-
 </form>
 </div>
 
 <script>
-$('#truck-form').on('submit', function(e){
+$('#truck-form').submit(function(e){
   e.preventDefault();
 
-  const $form = $(this);
   const $status = $('#status-message');
-  const $btn = $form.find('button');
+  const $btn = $('button[type=submit]');
 
-  $status.removeClass('success error').text('Đang gửi dữ liệu...');
   $btn.prop('disabled', true);
+  $status.removeClass().text('Đang gửi...');
 
   $.ajax({
-    url: 'https://script.google.com/macros/s/AKfycbxY0dP5IAjpdppSD9Xd6yXn7rVu4UVoVo5ALYs2irk17K2SjcewauyvmcKDtTsoxCdWQg/exec',
-    method: 'POST',
-    data: $form.serialize(),
-    dataType: 'json',
-    success: function(res){
-      if (res.result === 'success') {
-        $status.addClass('success').text('Gửi thành công!');
-        $form[0].reset();
-      } else {
-        $status.addClass('error').text(res.message || 'Lỗi server');
-      }
+    url: 'https://script.google.com/macros/s/AKfycbyRviRmL6XKmF5MIK9t0oRxZlCQFs4sAZoW2ctJGHzNaHMS0CmacKns-5zumPR1Dt7bDw/exec',
+    type: 'POST',
+    data: $(this).serialize(),
+    success: function(){
+      $status.addClass('success').text('✅ Gửi thành công');
+      $('#truck-form')[0].reset();
     },
     error: function(){
-      $status.addClass('error').text('Không kết nối được Google Sheet');
+      $status.addClass('error').text('❌ Lỗi gửi dữ liệu');
     },
     complete: function(){
       $btn.prop('disabled', false);
@@ -220,4 +194,3 @@ $('#truck-form').on('submit', function(e){
 
 </body>
 </html>
-
